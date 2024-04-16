@@ -3,7 +3,19 @@ on:
   pull_request:
     types:
       - opened
+    branches:
+      - main #main only
+      - 'dev-*' #dev-new dev-this-is-new
+      - 'feat/**' # feat/new feat/new/button
   workflow_dispatch:
+  push:
+    branches:
+      - main #main only
+      - 'dev-*' #dev-new dev-this-is-new
+      - 'feat/**' # feat/new feat/new/button
+        # branch->developer won't be considered
+    paths:
+      - '.github/workflows/*'
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -19,4 +31,4 @@ jobs:
       - name: Build code
         run: npm run build
       - name: Deploy project
-        run: echo "Deploying..."
+        run: echo "Deploying... from Dev"
